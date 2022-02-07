@@ -52,7 +52,6 @@ class ShopAPI(generics.ListCreateAPIView):
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
-        print(serializer.data)
         res = []
         for i in serializer.data:
             res.append({
