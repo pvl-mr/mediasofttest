@@ -4,12 +4,12 @@
 Тестовое задание Python расположено в корне проекта. <br />
 Используемые технологии: django-rest-framework, postgresql.
 
-## _Установка_
+## _Установка *_
 # Предварительные требования
 ```sh
 Python 3.8.8, pip 20.2.3, git, postgresql
 ```
-# 0. Создать пустую бд в postgresql согласно настройкам, указаным в setings.py DATABASES
+# 0. Создать пустую бд в postgresql согласно настройкам, указаным в setings.py DATABASES, 
 # 1. Клонирование проекта
 ```sh
 git clone https://github.com/pvl-mr/mediasofttest/
@@ -24,9 +24,15 @@ source ./venv/Scripts/activate
 ```sh
 pip install -r requirements.txt
 ```
-# 3. Запуск сервера
+# 4. Выполнить миграции бд **
+```sh
+python shopsite/manage.py makemigrations
+python shopsite/manage.py migrate
+```
+# 5. Запуск сервера
 ```sh
 python shopsite/manage.py runserver
 ```
 
-*Все команды выполнены в git bash OC Windows
+*Все команды выполнены в git bash OC Windows.
+** После выполнения миграций заполнить бд на своё усмторение.
