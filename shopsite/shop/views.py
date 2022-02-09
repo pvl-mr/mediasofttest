@@ -33,8 +33,6 @@ class ShopAPI(generics.ListCreateAPIView):
         city = self.request.GET.get('city')
         open = self.request.GET.get('open')
         shops = Shop.objects.all()
-        if not (street or city or open):
-            return Shop.objects.all()
         if street:
             shops = shops.filter(street_id=street)
         if city:
@@ -52,10 +50,11 @@ class ShopAPI(generics.ListCreateAPIView):
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
+        serializer.is_valid(raise_exception=True)
         res = []
         for i in serializer.data:
             res.append({
-                "city": City.objects.filter(id=i["city"]).values('name').first()['name'],
-                "street": Street.objects.filter(id=i["street"]).values('name').first()['name']
+                "city": i["city"]["name"],
+                "street": i["street"]["name"]
             })
         return Response(res)
